@@ -12,16 +12,14 @@ import pandas as pd
 
 def read_dir(dir='/home/work/opdir/liuguilin1/ecp/data/train/'):
     files =  os.listdir(dir)
-    res = pd.DataFrame()
+    l = []
     for file_name in files:
         print(file_name)
         file_path = os.path.join(dir, file_name)
-        print(file_path)
         df = pd.read_csv(file_path)
-        res = res.append(df)
-        print(file_name)
-        print(res.shape)
-    print(res.shape)
+        l.append(df)
+        print(len(l))
+    res = pd.concat(l,axis=0,ignore_index=True)
     x_vals = res.iloc[:,1:]
     y_vals = res.iloc[:,0]
     return (x_vals,y_vals)
